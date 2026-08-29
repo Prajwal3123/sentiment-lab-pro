@@ -203,20 +203,20 @@ function SidebarContent({
             )}
           </div>
         )}
-        <NavLink
-          to="/settings"
-          onClick={onNavigate}
-          className={({ isActive }) =>
-            cn(
-              "flex items-center gap-3 rounded-lg px-3 py-2 text-body-md text-sidebar-foreground hover:bg-sidebar-accent",
-              isActive && "bg-sidebar-accent text-sidebar-accent-foreground",
-              collapsed && "justify-center px-2",
-            )
-          }
-        >
-          <Settings aria-hidden className="size-4 shrink-0" strokeWidth={1.75} />
-          {!collapsed && <span>Settings</span>}
-        </NavLink>
+        <Link to="/settings" onClick={onNavigate}>
+          {({ isActive }) => (
+            <span
+              className={cn(
+                "flex items-center gap-3 rounded-lg px-3 py-2 text-body-md text-sidebar-foreground hover:bg-sidebar-accent",
+                isActive && "bg-sidebar-accent text-sidebar-accent-foreground",
+                collapsed && "justify-center px-2",
+              )}
+            >
+              <Settings aria-hidden className="size-4 shrink-0" strokeWidth={1.75} />
+              {!collapsed && <span>Settings</span>}
+            </span>
+          )}
+        </Link>
         {!mobile ? (
           <button
             type="button"
