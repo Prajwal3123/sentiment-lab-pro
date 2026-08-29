@@ -41,7 +41,13 @@ export function DataTable<T>({
 }) {
   if (isLoading) return <LoadingState />;
   if (error) return <ErrorState description={error} />;
-  if (!rows.length) return <EmptyState title={emptyTitle} description={emptyDescription} />;
+  if (!rows.length)
+    return (
+      <EmptyState
+        title={emptyTitle}
+        {...(emptyDescription ? { description: emptyDescription } : {})}
+      />
+    );
 
   return (
     <div className={cn("lab-scroll w-full overflow-x-auto", className)}>
