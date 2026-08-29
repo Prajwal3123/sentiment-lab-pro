@@ -52,7 +52,6 @@ export function SentimentDonut({
               if (!first) return null;
               const slice = first.payload as SentimentSlice;
               const share = slice.share ?? slice.count / total;
-              const share = slice.share ?? slice.count / total;
               return (
                 <ChartTooltipFrame title={LABELS[slice.sentiment]}>
                   <ChartTooltipRow
