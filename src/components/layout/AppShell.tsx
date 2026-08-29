@@ -22,7 +22,7 @@ import {
   X,
 } from "lucide-react";
 import { useEffect, useState, type ReactNode } from "react";
-import { Link, NavLink, Navigate, useLocation } from "@tanstack/react-router";
+import { Link, Navigate, useLocation } from "@tanstack/react-router";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -64,29 +64,28 @@ function NavLinks({
 }: {
   items: NavItem[];
   collapsed: boolean;
-  onNavigate?: () => void;
+  onNavigate?: (() => void) | undefined;
 }) {
   return (
     <nav aria-label="Primary" className="flex flex-col gap-1">
       {items.map((item) => (
-        <NavLink
-          key={item.to}
-          to={item.to}
-          onClick={onNavigate}
-          className={({ isActive }) =>
-            cn(
-              "flex items-center gap-3 rounded-lg px-3 py-2 text-body-md text-sidebar-foreground transition-colors",
-              "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:outline-2 focus-visible:outline-sidebar-ring",
-              isActive &&
-                "bg-sidebar-accent font-medium text-sidebar-accent-foreground shadow-[inset_2px_0_0_var(--sidebar-primary)]",
-              collapsed && "justify-center px-2",
-            )
-          }
-          title={collapsed ? item.label : undefined}
-        >
-          <item.icon aria-hidden className="size-4 shrink-0" strokeWidth={1.75} />
-          {!collapsed && <span className="truncate">{item.label}</span>}
-        </NavLink>
+        <Link key={item.to} to={item.to} onClick={onNavigate}>
+          {({ isActive }) => (
+            <span
+              className={cn(
+                "flex items-center gap-3 rounded-lg px-3 py-2 text-body-md text-sidebar-foreground transition-colors",
+                "hover:bg-sidebar-accent hover:text-sidebar-accent-foreground focus-visible:outline-2 focus-visible:outline-sidebar-ring",
+                isActive &&
+                  "bg-sidebar-accent font-medium text-sidebar-accent-foreground shadow-[inset_2px_0_0_var(--sidebar-primary)]",
+                collapsed && "justify-center px-2",
+              )}
+              title={collapsed ? item.label : undefined}
+            >
+              <item.icon aria-hidden className="size-4 shrink-0" strokeWidth={1.75} />
+              {!collapsed && <span className="truncate">{item.label}</span>}
+            </span>
+          )}
+        </Link>
       ))}
     </nav>
   );
